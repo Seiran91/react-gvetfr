@@ -1,0 +1,21 @@
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+form{
+    margin: 0 auto;
+    width: 50%;
+}
+
+input {
+    text-align: center;
+    }
