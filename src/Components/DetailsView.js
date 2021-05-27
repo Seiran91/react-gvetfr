@@ -20,7 +20,6 @@ class DetailsView extends React.Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id; // Get the id section on the requested url
     const requested_url = this.props.match.url; // StudentDetails/:id
     //console.log(this.props);
     // `http://localhost/connection.php/StudentDetails/${id}`
@@ -41,9 +40,9 @@ class DetailsView extends React.Component {
     const title = document.getElementById('Title').value;
     const student = { Name: name, Email: email, Title: title };
     /* Here will be the UPDATE function axios to update the student in db */
-    const id = this.props.match.params.id;
+    const requested_url = this.props.match.url; // StudentDetails/:id
     axios
-      .put(baseURL + '/' + id, student)
+      .put(baseURL + requested_url, student)
       .then(res => {
         console.log(
           `Before:\nName: ${this.state.details.Name}\nEmail: ${
@@ -106,9 +105,9 @@ class DetailsView extends React.Component {
   }
 
   Delete() {
-    const id = this.props.match.params.id;
+    const requested_url = this.props.match.url;
     axios
-      .delete(baseURL +"/"+ id)
+      .delete(baseURL + requested_url)
       .then(res => {
         console.log(res);
         this.props.history.push('/StudentList');
