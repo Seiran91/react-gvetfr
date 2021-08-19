@@ -16,6 +16,6 @@ form{
     width: 50%;
 }
 
-input {
+input, textarea {
     text-align: center;
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Switch, Route} from 'react-router-dom';
 import './App.css';
 import logo from './logo.svg';
 import "bootstrap/dist/css/bootstrap.css";
@@ -7,9 +7,16 @@ import StudentList from './Components/StudentsList';
 import DetailsView from './Components/DetailsView';
 import NavLinks from './Components/NavLinks';
 import RegLink from './Components/RegisterView';
-import Home from './Components/Home';
+import { getData } from './Components/requestsService';
+import { updateGlobalData } from './Components/backendUrl';
 
 function App() {
+  getData().then(res => updateGlobalData(res)).catch(console.error())
+  /* 
+  Using global variables it's bad programming practice but in this case we use them on purpose to
+  show the possibilities of these frameworks!
+  */
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +27,9 @@ function App() {
       <Router>
       <NavLinks />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/">
+            <Redirect to="/StudentList" />
+          </Route>
           <Route exact path="/StudentList" component={StudentList} />
           <Route exact path="/StudentDetails/:id" component={DetailsView} />
           <Route exact path="/RegLink" component={RegLink} />
