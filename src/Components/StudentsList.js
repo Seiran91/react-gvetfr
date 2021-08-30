@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "bootstrap/dist/css/bootstrap.css";
+import NavLinks from './NavLinks';
 import { getData } from './requestsService';
 import { globalData, updateGlobalData } from './backendUrl';
-
-
-
+import "bootstrap/dist/css/bootstrap.css";
+import './nav.css'
 
 class StudentList extends React.Component{
   constructor(props){
@@ -45,7 +44,7 @@ class StudentList extends React.Component{
         this.setState({
           filteredStudents: this.state.students.filter(result =>{
             return result.Name.toLowerCase().includes(searchVal.toLowerCase());
-          })
+          }) 
         })
       }else {
         this.setState({filteredStudents: this.state.students})
@@ -54,18 +53,21 @@ class StudentList extends React.Component{
 
     render(){
       return (
-        <ul className="list-group">
-          <input type="text" onChange={(event) =>this.handleSearch(event)} placeholder="Search..." />
-            { this.state.filteredStudents.map( list =>
-                <li key={list.id} className="list-group-item list-group-item-action">
-                  <Link to={`StudentDetails/${list.id}`}>
-                    <span >
-                      {list.Name}
-                    </span>
-                  </Link>
-                </li>
-            ) }
-        </ul>
+        <div className="half-width">
+          <NavLinks />
+          <ul className="list-group">
+            <input type="text" onChange={(event) =>this.handleSearch(event)} placeholder="Search..." />
+              { this.state.filteredStudents.map( list =>
+                  <li key={list.id} className="list-group-item list-group-item-action">
+                    <Link to={`StudentDetails/${list.id}`}>
+                      <span >
+                        {list.Name}
+                      </span>
+                    </Link>
+                  </li>
+              ) }
+          </ul>
+        </div>
       );
     }
   }

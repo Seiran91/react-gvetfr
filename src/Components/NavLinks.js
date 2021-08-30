@@ -1,22 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { authUser } from './backendUrl';
 import "bootstrap/dist/css/bootstrap.css";
 import './nav.css';
 
 function NavLinks(){
+    let user = authUser();
+    if(user.logged){
+        return(
+            <nav>
+                    <Link to={'/Login'}>
+                        <button className="btn logged-btn">
+                            Welcome {user.user}<i className="fa fa-user"></i>
+                        </button>
+                    </Link>
+                    <Link to={'/RegLink'}>
+                        <button className="btn logged-btn">
+                            <i className="fa fa-plus-square">Add Person</i>
+                        </button>
+                    </Link>
+            </nav>
+        );
+    } else {
     return(
-        <nav>
-            <Link to={'/StudentList'}>
-                <button type="button" className="btn btn-primary btn-lg">Student List</button>
-            </Link>
-            <Link to={'/RegLink'}>
-                <button type="button" className="btn btn-primary btn-lg">Register</button>
-            </Link>
+        <div className="rgt">
             <Link to={'/Login'}>
-                <button type="button" className="btn btn-primary btn-lg">Login</button>
+                <button className="btn login-btn">
+                    <i className="fa fa-user">{user.user}</i>
+                </button>
             </Link>
-        </nav>
-    );
+        </div>
+        );
+    }
 }
 
 export default NavLinks;

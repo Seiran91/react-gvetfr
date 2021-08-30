@@ -1,9 +1,23 @@
 import axios from 'axios';
-import { baseUrl } from './backendUrl';
+import { baseUrl, userUrl } from './backendUrl';
 var _ = require('underscore');
 
+/* All requests for the users data */
+export async function getUser(user){
+  return await axios.post(userUrl, user)
+        .then(response => {
+          //console.log(response.data);
+            return response.data;
+        })
+        .catch(error => {
+            console.log(error.error);
+            return error.error;
+        });
+}
+
+/* All requests for the students data */
 // GET Request
-async function getData(){
+export async function getData(){
     return await axios.get(baseUrl)
         .then(
             res => {
@@ -16,7 +30,7 @@ async function getData(){
           });
 }
 
-async function getDetails(url){
+export async function getDetails(url){
     return await axios.get(baseUrl+url)
       .then(
         res => {
@@ -29,7 +43,7 @@ async function getDetails(url){
 
 // POST Request
 
-async function sendData(reg){
+export async function sendData(reg){
    return await axios.post(baseUrl, reg)
         .then(response => {
             return response.data;
@@ -42,7 +56,7 @@ async function sendData(reg){
 
 // PUT Request
 
-async function updateDetails(url, student){
+export async function updateDetails(url, student){
     // Here will be the UPDATE function axios to update the student in db
     return await axios.put(baseUrl+url, student)
     .then(res => {
@@ -57,7 +71,7 @@ async function updateDetails(url, student){
 
 // DELETE Request
 
-async function deleteData(url){
+export async function deleteData(url){
     return await axios.delete(baseUrl+url).then(res => {
         return res.data;
       })
@@ -65,5 +79,3 @@ async function deleteData(url){
         console.log(error.error);
       });
     }
-
-export { getData, getDetails, sendData, updateDetails, deleteData }

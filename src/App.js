@@ -5,10 +5,11 @@ import logo from './logo.svg';
 import "bootstrap/dist/css/bootstrap.css";
 import StudentList from './Components/StudentsList';
 import DetailsView from './Components/DetailsView';
-import NavLinks from './Components/NavLinks';
 import RegLink from './Components/RegisterView';
+import Login from './Components/Login';
 import { getData } from './Components/requestsService';
 import { updateGlobalData } from './Components/backendUrl';
+import { NoMatch } from './Components/404error';
 
 function App() {
   getData().then(res => updateGlobalData(res)).catch(console.error())
@@ -25,14 +26,15 @@ function App() {
         <h2>MVC</h2>
       </header>
       <Router>
-      <NavLinks />
         <Switch>
-          <Route exact path="/">
-            <Redirect to="/StudentList" />
+          <Route exact path = "/">
+            <Redirect to = "/StudentList" />
           </Route>
-          <Route exact path="/StudentList" component={StudentList} />
-          <Route exact path="/StudentDetails/:id" component={DetailsView} />
-          <Route exact path="/RegLink" component={RegLink} />
+          <Route exact path = "/StudentList" component = {StudentList} />
+          <Route exact path = "/StudentDetails/:id" component = {DetailsView} />
+          <Route exact path = "/RegLink" component = {RegLink} />
+          <Route exact path = "/Login" component = {Login} />
+          <Route path = "*" component={NoMatch} />
         </Switch>
       </Router>
 
