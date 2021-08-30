@@ -9,6 +9,10 @@ nav{
     justify-content:space-between;
 }
 
+span {
+    display: inline-block;
+}
+
 tr td{
     border-bottom: 1px solid #ddd;
 }
